@@ -56,20 +56,20 @@ export default function (server: Server, ctx: AppContext, agent: BskyAgent) {
 
     let body: AlgoOutput | undefined = undefined
 
-    const cacheKey = JSON.stringify(params)
+    // const cacheKey = JSON.stringify(params)
 
-    if (algoCache.has(cacheKey)) {
-      const cached = algoCache.get(cacheKey)!
-      if (cached.date > Date.now() - 1000 * cacheAge.valueOf()) {
-        body = cached.output
-      } else {
-        algoCache.delete(cacheKey)
-      }
-    }
+    // if (algoCache.has(cacheKey)) {
+    //   const cached = algoCache.get(cacheKey)!
+    //   if (cached.date > Date.now() - 1000 * cacheAge.valueOf()) {
+    //     body = cached.output
+    //   } else {
+    //     algoCache.delete(cacheKey)
+    //   }
+    // }
 
     if (body === undefined) {
       body = await algo(ctx, params, agent, requesterDid)
-      algoCache.set(cacheKey, { date: Date.now(), output: body })
+      // algoCache.set(cacheKey, { date: Date.now(), output: body })
     }
     if (body.feed.length < params.limit) body.cursor = undefined
 
