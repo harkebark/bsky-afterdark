@@ -12,7 +12,7 @@ import * as fs from 'fs'
 dotenv.config()
 
 // max 15 chars
-export const shortname = 'mutuals-ad-test'
+export const shortname = 'mutuals-ad'
 
 export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyAgent, requesterDID?: string | null) => {
 

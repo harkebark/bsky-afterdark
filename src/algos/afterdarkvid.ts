@@ -10,7 +10,7 @@ import { BskyAgent } from '@atproto/api'
 dotenv.config()
 
 // max 15 chars
-export const shortname = 'mutuals-ad-vid-t'
+export const shortname = 'mutuals-ad-vid'
 
 export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyAgent, requesterDID?: string | null) => {
 
