@@ -17,15 +17,15 @@ const run = async () => {
   // A short name for the record that will show in urls
   // Lowercase with no spaces.
   // Ex: whats-hot
-  const recordName = 'mutuals-ad-test'
+  const recordName = 'mutuals-ad'
 
   // A display name for your feed
   // Ex: What's Hot
-  const displayName = "After Dark Testing Feed"
+  const displayName = "After Dark"
 
   // (Optional) A description of your feed
   // Ex: Top trending content from the whole network
-  const description = `NSFW media from people you follow. Includes all posts with NSFW labels or #nsfw in the post body. Contact @slut.dog for issues.`
+  const description = `NSFW media from people you follow. Includes all posts with NSFW labels. Contact @slut.dog for issues.`
 
   // (Optional) The path to an image to be used as your feed's avatar
   // Ex: ~/path/to/avatar.jpeg
