@@ -191,8 +191,7 @@ class dbSingleton {
       .findOne({ service: service })
     if (res === null) {
       console.log( `SubState cursor not found for ${service}`)
-      return { service: service, cursor: 1732078800000000 }
-      // return { service: service, cursor: 1738874930598246 }
+      return { service: service, cursor: 0 }
     }
     return res
   }
