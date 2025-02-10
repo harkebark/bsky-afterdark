@@ -1,12 +1,15 @@
 import { FirehoseSubscriptionBase } from './util/subscription'
 
 import algos from './algos'
-import batchUpdate from './addn/batchUpdate'
+
 
 import { Database } from './db'
-
+import batchUpdate from './addn/batchUpdate'
 import crypto from 'crypto'
 import { BskyAgent } from '@atproto/api'
+import { isNull } from 'util'
+import { create } from 'domain'
+import { CallTracker } from 'assert'
 
 export class FirehoseSubscription extends FirehoseSubscriptionBase {
   public algoManagers: any[]
@@ -22,7 +25,8 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
 
     const agent = new BskyAgent({ service: 'https://public.api.bsky.app' })
 
-    batchUpdate(agent, 5 * 60 * 1000)
+    batchUpdate(agent, 3 * 60 * 1000)
+    // batchUpdate(agent, 1 * 60 * 1000)
 
     Object.keys(algos).forEach((algo) => {
       this.algoManagers.push(new algos[algo].manager(db, agent))
@@ -48,6 +52,8 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
 
     const postsToDelete = posts.deletes.map((del) => del.uri)
 
+    let label: string[] | null = null
+
     // Transform posts in parallel
     const postsCreated = posts.creates.map((create) => ({
       _id: null,
@@ -62,6 +68,9 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       algoTags: null,
       embed: create.record?.embed,
       tags: Array.isArray(create.record?.tags) ? create.record?.tags : [],
+      labels: create.record?.labels ? create.record?.labels.values.map((label) => {
+        return label.val
+      }) : []
     }))
 
     const postsToCreatePromises = postsCreated.map(async (post) => {

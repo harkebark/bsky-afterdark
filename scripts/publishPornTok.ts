@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { AtpAgent, BlobRef } from '@atproto/api'
+import { AtpAgent, BlobRef, AppBskyFeedDefs } from '@atproto/api'
 import fs from 'fs/promises'
 import { ids } from '../src/lexicon/lexicons'
 
@@ -17,20 +17,19 @@ const run = async () => {
   // A short name for the record that will show in urls
   // Lowercase with no spaces.
   // Ex: whats-hot
-  const recordName = 'elusive'
+  const recordName = 'mutuals-ad-vid-t'
 
   // A display name for your feed
   // Ex: What's Hot
-  const displayName = 'The Elusive Follows'
+  const displayName = "After Dark Video Testing"
 
   // (Optional) A description of your feed
   // Ex: Top trending content from the whole network
-  const description =
-    'A highly curated list of people that share an elusive quality.'
+  const description = `NSFW videos from people you follow. Includes all video posts with NSFW labels or #nsfw in the post body. Contact @slut.dog for issues.`
 
   // (Optional) The path to an image to be used as your feed's avatar
   // Ex: ~/path/to/avatar.jpeg
-  const avatar: string = 'images/elusive.png'
+  const avatar: string = 'images/ad-vid.png'
 
   // -------------------------------------
   // NO NEED TO TOUCH ANYTHING BELOW HERE
@@ -63,6 +62,8 @@ const run = async () => {
     avatarRef = blobRes.data.blob
   }
 
+  console.log(feedGenDid)
+
   const res = await agent.api.com.atproto.repo.putRecord({
     repo: agent.session?.did ?? '',
     collection: ids.AppBskyFeedGenerator,
@@ -73,6 +74,9 @@ const run = async () => {
       description: description,
       avatar: avatarRef,
       createdAt: new Date().toISOString(),
+      contentMode: AppBskyFeedDefs.CONTENTMODEVIDEO
+      // contentMode: AppBskyFeedDefs.CONTENTMODEUNSPECIFIED
+
     },
   })
 

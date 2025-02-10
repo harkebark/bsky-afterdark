@@ -13,11 +13,12 @@ dotenv.config()
 export const shortname = 'cats'
 
 export const handler = async (ctx: AppContext, params: QueryParams) => {
+  console.log("Fetching posts")
   const builder = await dbClient.getLatestPostsForTag({
     tag: shortname,
     limit: params.limit,
     cursor: params.cursor,
-    mediaOnly: true,
+    mediaOnly: false,
     nsfwOnly: false,
     excludeNSFW: true,
   })
@@ -27,6 +28,7 @@ export const handler = async (ctx: AppContext, params: QueryParams) => {
   }))
 
   let cursor: string | undefined
+
   const last = builder.at(-1)
   if (last) {
     cursor = `${new Date(last.indexedAt).getTime()}::${last.cid}`

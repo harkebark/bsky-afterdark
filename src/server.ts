@@ -1,6 +1,7 @@
 import http from 'http'
 import events from 'events'
 import express from 'express'
+import dotenv from 'dotenv'
 import { DidResolver, MemoryCache } from '@atproto/identity'
 import { createServer } from './lexicon'
 import feedGeneration from './methods/feed-generation'
@@ -9,6 +10,7 @@ import dbClient from './db/dbClient'
 import { FirehoseSubscription } from './subscription'
 import { AppContext, Config } from './config'
 import wellKnown from './well-known'
+import { AtpAgent, BskyAgent } from '@atproto/api'
 
 export class FeedGenerator {
   public app: express.Application
@@ -26,10 +28,12 @@ export class FeedGenerator {
     this.cfg = cfg
   }
 
-  static create(cfg: Config) {
+  static async create(cfg: Config) {
     const app = express()
     const db = dbClient
     const firehose = new FirehoseSubscription(db, cfg.subscriptionEndpoint)
+
+    const agent = new BskyAgent({ service: 'https://public.api.bsky.app' })
 
     const didCache = new MemoryCache()
     const didResolver = new DidResolver({
@@ -50,7 +54,7 @@ export class FeedGenerator {
       didResolver,
       cfg,
     }
-    feedGeneration(server, ctx)
+    feedGeneration(server, ctx, agent)
     describeGenerator(server, ctx)
     app.use(server.xrpc.router)
     app.use(wellKnown(ctx))

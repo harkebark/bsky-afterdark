@@ -26,6 +26,7 @@ export abstract class FirehoseSubscriptionBase {
 
   async run(subscriptionReconnectDelay: number) {
     let lastSuccessfulCursor = (await this.getCursor()).cursor
+    console.log("Fetching jetstream with cursor:", lastSuccessfulCursor)
     const eventQueue: any[] = []
 
     this.jetstream = new Jetstream({

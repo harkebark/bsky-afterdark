@@ -17,20 +17,19 @@ const run = async () => {
   // A short name for the record that will show in urls
   // Lowercase with no spaces.
   // Ex: whats-hot
-  const recordName = 'dads'
+  const recordName = 'mutuals-ad-test'
 
   // A display name for your feed
   // Ex: What's Hot
-  const displayName = "What's Dad"
+  const displayName = "After Dark Testing Feed"
 
   // (Optional) A description of your feed
   // Ex: Top trending content from the whole network
-  const description =
-    "A feed of people with 'father' and 'dad' in bio. (As requested by/credit to @sweetbee.vip)"
+  const description = `NSFW media from people you follow. Includes all posts with NSFW labels or #nsfw in the post body. Contact @slut.dog for issues.`
 
   // (Optional) The path to an image to be used as your feed's avatar
   // Ex: ~/path/to/avatar.jpeg
-  const avatar: string = 'images/dads.png'
+  const avatar: string = 'images/ad.png'
 
   // -------------------------------------
   // NO NEED TO TOUCH ANYTHING BELOW HERE
@@ -62,6 +61,8 @@ const run = async () => {
     })
     avatarRef = blobRes.data.blob
   }
+
+  console.log(feedGenDid)
 
   const res = await agent.api.com.atproto.repo.putRecord({
     repo: agent.session?.did ?? '',

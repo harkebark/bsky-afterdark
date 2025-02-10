@@ -17,19 +17,19 @@ const run = async () => {
   // A short name for the record that will show in urls
   // Lowercase with no spaces.
   // Ex: whats-hot
-  const recordName = 'paxaus'
+  const recordName = 'ad-test'
 
   // A display name for your feed
   // Ex: What's Hot
-  const displayName = '#PAXAus'
+  const displayName = "After Dark WIP"
 
   // (Optional) A description of your feed
   // Ex: Top trending content from the whole network
-  const description = 'A feed for PAXAus!'
+  const description = `NSFW media from people you follow. Includes all posts with NSFW labels or #nsfw in the post body.`
 
   // (Optional) The path to an image to be used as your feed's avatar
   // Ex: ~/path/to/avatar.jpeg
-  const avatar: string = 'images/paxaus.png'
+  const avatar: string = 'images/ad.png'
 
   // -------------------------------------
   // NO NEED TO TOUCH ANYTHING BELOW HERE
@@ -44,6 +44,14 @@ const run = async () => {
   // only update this if in a test environment
   const agent = new AtpAgent({ service: 'https://bsky.social' })
   await agent.login({ identifier: handle, password: password })
+
+  try {
+    await agent.api.app.bsky.feed.describeFeedGenerator()
+  } catch (err) {
+    throw new Error(
+      'The bluesky server is not ready to accept published custom feeds yet',
+    )
+  }
 
   let avatarRef: BlobRef | undefined
   if (avatar) {
@@ -62,7 +70,9 @@ const run = async () => {
     avatarRef = blobRes.data.blob
   }
 
-  const res = await agent.api.com.atproto.repo.putRecord({
+  console.log(feedGenDid)
+
+  const res = await agent.api.com.atproto.repo.deleteRecord({
     repo: agent.session?.did ?? '',
     collection: ids.AppBskyFeedGenerator,
     rkey: recordName,

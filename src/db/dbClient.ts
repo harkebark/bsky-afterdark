@@ -8,6 +8,8 @@ import {
 } from 'mongodb'
 import dotenv from 'dotenv'
 import { InvalidRequestError } from '@atproto/xrpc-server'
+import {Post} from '../db/schema'
+
 
 dotenv.config()
 
@@ -32,6 +34,17 @@ class dbSingleton {
   async init() {
     if (this.client === null) throw new Error('DB Cannot be null')
     await this.client.connect()
+
+    const postCollection = this.client.db().collection('post')
+
+    await postCollection.createIndex({ uri: 1 });
+    await postCollection.createIndex({ indexedAt: -1, cid: -1 });
+    await postCollection.createIndex({ algoTags: 1 });
+    await postCollection.createIndex({ author: 1 });
+    await postCollection.createIndex({ labels: 1 });
+    await postCollection.createIndex({ "embed.images": 1 });
+    await postCollection.createIndex({ "embed.video": 1 });
+    await postCollection.createIndex({ "embed.media": 1 });
   }
 
   async deleteManyURI(collection: string, uris: string[]) {
@@ -176,7 +189,11 @@ class dbSingleton {
       ?.db()
       .collection('sub_state')
       .findOne({ service: service })
-    if (res === null) return { service: service, cursor: 0 }
+    if (res === null) {
+      console.log( `SubState cursor not found for ${service}`)
+      return { service: service, cursor: 1732078800000000 }
+      // return { service: service, cursor: 1738874930598246 }
+    }
     return res
   }
 
@@ -187,6 +204,7 @@ class dbSingleton {
     mediaOnly = false,
     nsfwOnly = false,
     excludeNSFW = false,
+    authors = [],
     sortOrder = -1,
   }: {
     tag: string
@@ -195,9 +213,10 @@ class dbSingleton {
     mediaOnly?: boolean
     nsfwOnly?: boolean
     excludeNSFW?: boolean
+    authors?: string[]
     sortOrder?: SortDirection
   }) {
-    let query: { indexedAt?: any; cid?: any; algoTags: string; $and?: any[] } =
+    let query: { indexedAt?: any; cid?: any; algoTags: string; author?: any; $and?: any[] } =
       {
         algoTags: tag,
       }
@@ -225,9 +244,14 @@ class dbSingleton {
       conditions.push({
         labels: {
           $nin: ['porn', 'nudity', 'sexual', 'underwear'],
-          $ne: null,
+          // $ne: null,
         },
       })
+    }
+    if (authors.length > 0) {
+      query['author'] = {
+        $in: authors
+      }
     }
 
     if (cursor !== undefined) {
@@ -287,7 +311,7 @@ class dbSingleton {
           { 'embed.video': { $ne: null } },
           { 'embed.media': { $ne: null } },
         ],
-        labels: null,
+        labels: [],
         indexedAt: { $lt: new Date().getTime() - lagTime },
       })
       .sort({ indexedAt: -1, cid: -1 })
