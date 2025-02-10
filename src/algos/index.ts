@@ -7,6 +7,7 @@ import {
 import * as cats from './cats'
 import * as afterdark from './afterdark'
 import * as afterdarkvid from './afterdarkvid'
+import * as external from './externalList'
 import { BskyAgent } from '@atproto/api'
 
 
@@ -25,6 +26,10 @@ const algos = {
   [afterdarkvid.shortname]: {
     handler: <AlgoHandler>afterdarkvid.handler,
     manager: afterdarkvid.manager,
+  },
+  [external.shortname]: {
+    handler: <AlgoHandler>external.handler,
+    manager: external.manager,
   },
   
 }
