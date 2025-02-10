@@ -25,7 +25,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
 
     const agent = new BskyAgent({ service: 'https://public.api.bsky.app' })
 
-    batchUpdate(agent, 3 * 60 * 1000)
+    batchUpdate(agent, 5 * 60 * 1000)
     // batchUpdate(agent, 1 * 60 * 1000)
 
     Object.keys(algos).forEach((algo) => {
