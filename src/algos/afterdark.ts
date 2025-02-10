@@ -72,6 +72,13 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
     post: row.uri,
   }))
 
+  if (requesterDID === process.env.FEEDGEN_PUBLISHER_DID) {
+    console.log("Saving to authors.json")
+    fs.writeFileSync('authors.json', JSON.stringify(authors, null, 4))
+    fs.writeFileSync('posts.json', JSON.stringify(feed, null, 4))
+  }
+
+
   let pinned_req_cursor: string | null = null;
   let pinned: any[] = [
     // i.e. {post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/somepostrecordid`},
