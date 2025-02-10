@@ -52,7 +52,7 @@ export default function (server: Server, ctx: AppContext, agent: BskyAgent) {
     )
     
 
-    console.log(requesterDid)
+    console.log(requesterDid, req)
 
     let body: AlgoOutput | undefined = undefined
 
