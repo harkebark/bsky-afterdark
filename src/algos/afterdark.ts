@@ -8,6 +8,7 @@ import { Database } from '../db'
 import { BskyAgent } from '@atproto/api'
 
 import * as fs from 'fs'
+import { request } from 'http'
 
 dotenv.config()
 
@@ -53,6 +54,8 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
     }
 
   }
+
+  console.log("Got ", authors.length, " authors for ", requesterDID)
 
 
   const builder = await dbClient.getLatestPostsForTag({
