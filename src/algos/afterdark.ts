@@ -22,6 +22,8 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
   let authors: any[] = [];
   let req_cursor: string | null = null;
 
+  const realagent = new BskyAgent({ service: 'https://public.api.bsky.app' })
+
   if (requesterDID) {
 
     try {
@@ -32,7 +34,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
 
       while (true) {
 
-        const res = await agent.api.app.bsky.graph.getFollows({
+        const res = await realagent.api.app.bsky.graph.getFollows({
           actor: requesterDID,
           limit: 100, // default 50, max 100
           ... (req_cursor !== null ? { ['cursor']: req_cursor } : {})
@@ -90,7 +92,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
     let likes: string[] = []
     while (true) {
 
-      const res = await agent.api.app.bsky.feed.getLikes({
+      const res = await realagent.api.app.bsky.feed.getLikes({
         uri: post.post,
         limit: 100, // default 50, max 100
         ... (pinned_req_cursor !== null ? { ['cursor']: pinned_req_cursor } : {})
