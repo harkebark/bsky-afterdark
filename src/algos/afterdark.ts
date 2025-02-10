@@ -100,7 +100,10 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
       }
     }
     if (requesterDID && !likes.includes(requesterDID)) {
+      console.log(requesterDID, " has liked a pinned post")
       feed.unshift(post)
+    } else {
+      console.log(requesterDID, " has NOT liked a pinned post")
     }
   }
 
