@@ -85,7 +85,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
   let pinned_req_cursor: string | null = null;
   let pinned: any[] = [
     // i.e. {post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/somepostrecordid`},
-    { post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/3lhtv6qllu22w` },
+    // { post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/3lhtv6qllu22w` },
 
   ]
 
@@ -111,7 +111,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
     }
     if (requesterDID && !likes.includes(requesterDID)) {
       console.log(requesterDID, " has liked a pinned post")
-      feed.unshift(post)
+      // feed.unshift(post)
     } else {
       console.log(requesterDID, " has NOT liked a pinned post")
     }
