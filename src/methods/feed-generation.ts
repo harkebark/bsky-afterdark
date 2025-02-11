@@ -52,7 +52,7 @@ export default function (server: Server, ctx: AppContext, agent: BskyAgent) {
       ctx.didResolver,
     )
     
-    console.log("Request from: ", requesterDid, " with authorization: ", authorization)
+    // console.log("Request from: ", requesterDid, " with authorization: ", authorization)
     // console.log(requesterDid, " requested a feed")
 
     let body: AlgoOutput | undefined = undefined

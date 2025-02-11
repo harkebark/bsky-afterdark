@@ -17,7 +17,7 @@ export const shortname = 'mutuals-ad'
 
 export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyAgent, requesterDID?: string | null) => {
 
-  console.log(requesterDID, " is requesting the after dark feed")
+  // console.log(requesterDID, " is requesting the after dark feed")
 
   let authors: any[] = [];
   let req_cursor: string | null = null;
@@ -56,7 +56,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
 
   }
 
-  console.log("Got ", authors.length, " authors for ", requesterDID)
+  // console.log("Got ", authors.length, " authors for ", requesterDID)
 
 
   const builder = await dbClient.getLatestPostsForTag({
@@ -70,26 +70,30 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
   })
 
 
-  let feed: any[] = []
+  // let feed: any[] = []
 
-  if (requesterDID == process.env.FEEDGEN_PUBLISHER_DID) {
-    feed = builder.map((row) => ({
-      post: row.uri,
-    }))
-  } 
+  // if (requesterDID == process.env.FEEDGEN_PUBLISHER_DID) {
+  //   feed = builder.map((row) => ({
+  //     post: row.uri,
+  //   }))
+  // } 
 
 
-  if (requesterDID === process.env.FEEDGEN_PUBLISHER_DID) {
-    console.log("Saving to authors.json")
-    fs.writeFileSync('authors.json', JSON.stringify(authors, null, 4))
-    fs.writeFileSync('posts.json', JSON.stringify(feed, null, 4))
-  }
+  // if (requesterDID === process.env.FEEDGEN_PUBLISHER_DID) {
+  //   console.log("Saving to authors.json")
+  //   fs.writeFileSync('authors.json', JSON.stringify(authors, null, 4))
+  //   fs.writeFileSync('posts.json', JSON.stringify(feed, null, 4))
+  // }
 
+
+  let feed = builder.map((row) => ({
+    post: row.uri,
+  }))
 
   let pinned_req_cursor: string | null = null;
   let pinned: any[] = [
     // i.e. {post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/somepostrecordid`},
-    // { post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/3lhtv6qllu22w` },
+    { post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/3lhw3o6estk2a` },
 
   ]
 
@@ -115,7 +119,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
     }
     if (requesterDID && !likes.includes(requesterDID)) {
       console.log(requesterDID, " has liked a pinned post")
-      // feed.unshift(post)
+      feed.unshift(post)
     } else {
       console.log(requesterDID, " has NOT liked a pinned post")
     }
