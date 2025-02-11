@@ -14,7 +14,7 @@ export const shortname = 'mutuals-ad-vid'
 
 export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyAgent, requesterDID?: string | null) => {
 
-  console.log(requesterDID, " is requesting the after dark feed")
+  // console.log(requesterDID, " is requesting the after dark feed")
 
   let authors: any[] = [];
   let req_cursor: string | null = null;
@@ -66,11 +66,9 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
     authors: authors
   })
 
-  // let feed = builder.map((row) => ({
-  //   post: row.uri,
-  // }))
-
-  let feed = []
+  let feed = builder.map((row) => ({
+    post: row.uri,
+  }))
 
 
   let cursor: string | undefined
