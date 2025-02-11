@@ -56,15 +56,15 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
 
   }
 
-  // const builder = await dbClient.getLatestPostsForTag({
-  //   tag: shortname,
-  //   limit: params.limit,
-  //   cursor: params.cursor,
-  //   mediaOnly: true,
-  //   nsfwOnly: true,
-  //   excludeNSFW: false,
-  //   authors: authors
-  // })
+  const builder = await dbClient.getLatestPostsForTag({
+    tag: shortname,
+    limit: params.limit,
+    cursor: params.cursor,
+    mediaOnly: true,
+    nsfwOnly: true,
+    excludeNSFW: false,
+    authors: authors
+  })
 
   // let feed = builder.map((row) => ({
   //   post: row.uri,
