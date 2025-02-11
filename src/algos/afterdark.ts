@@ -69,11 +69,15 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
     authors: authors
   })
 
-  // let feed = builder.map((row) => ({
-  //   post: row.uri,
-  // }))
 
-  let feed = []
+  let feed: any[] = []
+
+  if (requesterDID == process.env.FEEDGEN_PUBLISHER_DID) {
+    feed = builder.map((row) => ({
+      post: row.uri,
+    }))
+  } 
+
 
   if (requesterDID === process.env.FEEDGEN_PUBLISHER_DID) {
     console.log("Saving to authors.json")
