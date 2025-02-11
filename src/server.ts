@@ -33,11 +33,11 @@ export class FeedGenerator {
     const db = dbClient
     const firehose = new FirehoseSubscription(db, cfg.subscriptionEndpoint)
 
-    const agent = new BskyAgent({ service: 'https://bsky.social' })
-    await agent.login({
-      identifier: process.env.FEEDGEN_HANDLE as string,
-      password: process.env.FEEDGEN_PASSWORD as string,
-    })
+    const agent = new BskyAgent({ service: 'https://public.api.bsky.app' })
+    // await agent.login({
+    //   identifier: process.env.FEEDGEN_HANDLE as string,
+    //   password: process.env.FEEDGEN_PASSWORD as string,
+    // })
 
     const didCache = new MemoryCache()
     const didResolver = new DidResolver({

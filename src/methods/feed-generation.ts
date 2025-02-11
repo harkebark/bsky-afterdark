@@ -6,7 +6,7 @@ import { validateAuth } from '../auth'
 import { AtUri } from '@atproto/syntax'
 import { OutputSchema as AlgoOutput } from '../lexicon/types/app/bsky/feed/getFeedSkeleton'
 // import { request } from 'http'
-import { BskyAgent } from '@atproto/api'
+import { BskyAgent, ComAtprotoServerResetPassword } from '@atproto/api'
 
 const algoCache = new Map<string, { date: number; output: AlgoOutput | undefined }>()
 
@@ -27,12 +27,12 @@ export default function (server: Server, ctx: AppContext, agent: BskyAgent) {
       )
     }
 
-    const cacheAge = algos[feedUri.rkey].manager.cacheAge(params)
-    if (cacheAge.valueOf() > 0) {
-      res.setHeader('Cache-Control', `public, max-age=${cacheAge}`)
-    } else {
-      res.setHeader('Cache-Control', `no-cache`)
-    }
+    // const cacheAge = algos[feedUri.rkey].manager.cacheAge(params)
+    // if (cacheAge.valueOf() > 0) {
+    //   res.setHeader('Cache-Control', `public, max-age=${cacheAge}`)
+    // } else {
+    //   res.setHeader('Cache-Control', `no-cache`)
+    // }
 
     /**
      * Example of how to check auth if giving user-specific results:
@@ -43,7 +43,8 @@ export default function (server: Server, ctx: AppContext, agent: BskyAgent) {
      *   ctx.didResolver,
      * )
      */
-    console.log("Got request!")
+    
+    const { authorization = '' } = req.headers
 
     const requesterDid = await validateAuth(
       req,
@@ -51,8 +52,8 @@ export default function (server: Server, ctx: AppContext, agent: BskyAgent) {
       ctx.didResolver,
     )
     
-
-    console.log(requesterDid, " requested a feed")
+    console.log("Request from: ", requesterDid, " with authorization: ", authorization)
+    // console.log(requesterDid, " requested a feed")
 
     let body: AlgoOutput | undefined = undefined
 
