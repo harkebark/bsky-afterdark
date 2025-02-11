@@ -21,7 +21,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
 
   let authors: any[] = [];
   let req_cursor: string | null = null;
-  
+
 
   if (requesterDID) {
 
@@ -59,19 +59,21 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
   console.log("Got ", authors.length, " authors for ", requesterDID)
 
 
-  const builder = await dbClient.getLatestPostsForTag({
-    tag: shortname,
-    limit: params.limit,
-    cursor: params.cursor,
-    mediaOnly: true,
-    nsfwOnly: true,
-    excludeNSFW: false,
-    authors: authors
-  })
+  // const builder = await dbClient.getLatestPostsForTag({
+  //   tag: shortname,
+  //   limit: params.limit,
+  //   cursor: params.cursor,
+  //   mediaOnly: true,
+  //   nsfwOnly: true,
+  //   excludeNSFW: false,
+  //   authors: authors
+  // })
 
-  let feed = builder.map((row) => ({
-    post: row.uri,
-  }))
+  // let feed = builder.map((row) => ({
+  //   post: row.uri,
+  // }))
+
+  let feed = []
 
   if (requesterDID === process.env.FEEDGEN_PUBLISHER_DID) {
     console.log("Saving to authors.json")
@@ -83,7 +85,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
   let pinned_req_cursor: string | null = null;
   let pinned: any[] = [
     // i.e. {post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/somepostrecordid`},
-    {post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/3lhtv6qllu22w`},
+    { post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/3lhtv6qllu22w` },
 
   ]
 
