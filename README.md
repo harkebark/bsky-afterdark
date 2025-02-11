@@ -6,7 +6,7 @@ The feeds in this repo store all media posts off the firehose to a database and 
 
 # Hosting
 
-This feed is hosted on [Digital Ocean](https://m.do.co/c/a838c8f1e33a) which was achieved by [following the guide written by Bossett.](https://bossett.io/setting-up-bossetts-bluesky-feed-generator/) It walks you through setup of the app and gives Bossett some affiliate credit for putting all of this together. Given the high volume of image posts I recommend using the $10 application tier instead of the $5 testing tier recommended in the guide, but ymmv.
+This feed is hosted on [Digital Ocean](https://m.do.co/c/a838c8f1e33a) which was achieved by [following the guide written by Bossett.](https://bossett.io/setting-up-bossetts-bluesky-feed-generator/) It walks you through setup of the app and gives Bossett some affiliate credit for putting all of this together. The After Dark feed gets a lot of requests and indexes every media post on the site before batch updating labels so my monthly costs end up being around $100 between the database and the main server. YMMV, start with the smallest tier you can get away with and scale up as necessary.
 
 # Feeds
 
