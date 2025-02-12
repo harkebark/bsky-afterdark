@@ -93,7 +93,7 @@ export const handler = async (ctx: AppContext, params: QueryParams, agent: BskyA
   let pinned_req_cursor: string | null = null;
   let pinned: any[] = [
     // i.e. {post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/somepostrecordid`},
-    { post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/3lhw3o6estk2a` },
+    { post: `at://${process.env.FEEDGEN_PUBLISHER_DID}/app.bsky.feed.post/3lhyfj7p7hk2r` },
 
   ]
 
