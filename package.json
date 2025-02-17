@@ -19,7 +19,7 @@
   },
   "dependencies": {
     "@atcute/client": "^2.0.6",
-    "@atproto/api": "^0.13.5",
+    "@atproto/api": "^0.14.1",
     "@atproto/identity": "^0.4.1",
     "@atproto/lexicon": "^0.4.1",
     "@atproto/repo": "^0.6.4",
