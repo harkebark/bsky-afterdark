@@ -22,7 +22,7 @@
     "@atproto/api": "^0.13.5",
     "@atproto/identity": "^0.4.1",
     "@atproto/lexicon": "^0.4.1",
-    "@atproto/repo": "^0.6.4",
+    "@atproto/repo": "^0.6.5",
     "@atproto/syntax": "^0.3.0",
     "@atproto/xrpc-server": "0.7.10",
     "@skyware/jetstream": "^0.2.1",
