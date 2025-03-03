@@ -98,7 +98,7 @@ export class manager extends AlgoManager {
   public async periodicTask() {
     await this.db.removeTagFromOldPosts(
       this.name,
-      new Date().getTime() - 28 * 24 * 60 * 60 * 1000,
+      new Date().getTime() - 56 * 24 * 60 * 60 * 1000,
     )
   }
 
