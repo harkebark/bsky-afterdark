@@ -65,26 +65,26 @@
     "@atproto/common-web" "^0.4.0"
     "@atproto/crypto" "^0.4.4"
 
-"@atproto/lexicon@^0.4.1", "@atproto/lexicon@^0.4.6":
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/@atproto/lexicon/-/lexicon-0.4.6.tgz#74b2a0f3e4c867b33f75430d4ccec70c47e41576"
-  integrity sha512-RbiwXcnTuLp9vQrNoQ7xly8HyifKkovqCYtbfXVwqdylWYKPhmRsYkRfcPNv/lILhT9Lm0GVnxNwGGwvvgIsfA==
+"@atproto/lexicon@^0.4.1", "@atproto/lexicon@^0.4.6", "@atproto/lexicon@^0.4.8":
+  version "0.4.8"
+  resolved "https://registry.yarnpkg.com/@atproto/lexicon/-/lexicon-0.4.8.tgz#389d09f14e190b0e607348613ec5ded586a7df47"
+  integrity sha512-NPhu4MNHqft4muvHvcU0BrkWoEpTI+OmbQzvZzzRpw54MW3PfrQ4TPEpAfPOrWugPB9y4mD+l8OMN1c9eOGWMQ==
   dependencies:
     "@atproto/common-web" "^0.4.0"
-    "@atproto/syntax" "^0.3.2"
+    "@atproto/syntax" "^0.3.4"
     iso-datestring-validator "^2.2.2"
     multiformats "^9.9.0"
     zod "^3.23.8"
 
-"@atproto/repo@^0.6.4":
-  version "0.6.4"
-  resolved "https://registry.yarnpkg.com/@atproto/repo/-/repo-0.6.4.tgz#c0a9856c66dd358ed8a2dc4db2201804c6124384"
-  integrity sha512-76uffFi5fanhlYVFeif7OfvDVahUeVtcY9eZLxpdUC6yf+88wRHLZbVmUwq7sfLIFlX1cP/syXMMlnI7TQVlxQ==
+"@atproto/repo@^0.7.1":
+  version "0.7.1"
+  resolved "https://registry.yarnpkg.com/@atproto/repo/-/repo-0.7.1.tgz#4420b3433a43277c4e8983d6584c08f48c04b31b"
+  integrity sha512-0U7iuO+Xf1H/2s0KHOoW/QCSRnegMOoCqHi8PJcB0sOx91h5mAB71nltxhOUhYfdVCLnXATSO/Xkux/6cjsQZw==
   dependencies:
     "@atproto/common" "^0.4.8"
     "@atproto/common-web" "^0.4.0"
     "@atproto/crypto" "^0.4.4"
-    "@atproto/lexicon" "^0.4.6"
+    "@atproto/lexicon" "^0.4.8"
     "@ipld/car" "^3.2.3"
     "@ipld/dag-cbor" "^7.0.0"
     multiformats "^9.9.0"
@@ -95,6 +95,11 @@
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@atproto/syntax/-/syntax-0.3.2.tgz#188f8dccba11e5ace1bf83cbff8ed9e1a3d2d66c"
   integrity sha512-JLMhTbXER1Im98RrozfsLAZARGIAzKCZEm+Inh1IF00XU6tHcoGKS+HOw0Uy4R2r04yvxoFs8fswmwAhmMpMdw==
+
+"@atproto/syntax@^0.3.4":
+  version "0.3.4"
+  resolved "https://registry.yarnpkg.com/@atproto/syntax/-/syntax-0.3.4.tgz#28326c73f8dff010399145f5bd4ceeeb1ab206ba"
+  integrity sha512-8CNmi5DipOLaVeSMPggMe7FCksVag0aO6XZy9WflbduTKM4dFZVCs4686UeMLfGRXX+X966XgwECHoLYrovMMg==
 
 "@atproto/xrpc-server@0.7.10":
   version "0.7.10"
