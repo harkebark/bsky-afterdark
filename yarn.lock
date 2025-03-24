@@ -65,13 +65,13 @@
     "@atproto/common-web" "^0.4.0"
     "@atproto/crypto" "^0.4.4"
 
-"@atproto/lexicon@^0.4.1", "@atproto/lexicon@^0.4.6":
-  version "0.4.6"
-  resolved "https://registry.yarnpkg.com/@atproto/lexicon/-/lexicon-0.4.6.tgz#74b2a0f3e4c867b33f75430d4ccec70c47e41576"
-  integrity sha512-RbiwXcnTuLp9vQrNoQ7xly8HyifKkovqCYtbfXVwqdylWYKPhmRsYkRfcPNv/lILhT9Lm0GVnxNwGGwvvgIsfA==
+"@atproto/lexicon@^0.4.6", "@atproto/lexicon@^0.4.9":
+  version "0.4.9"
+  resolved "https://registry.yarnpkg.com/@atproto/lexicon/-/lexicon-0.4.9.tgz#612951a85ecc1398366bd837cda6be89440f179d"
+  integrity sha512-/tmEuHQFr51V2V7EAVJzaA40sqJ7ylAZpR962VbOsPtmcdOHvezbjVHYEMXgfb927hS+xqbVyzBTbu5w9v8prA==
   dependencies:
     "@atproto/common-web" "^0.4.0"
-    "@atproto/syntax" "^0.3.2"
+    "@atproto/syntax" "^0.4.0"
     iso-datestring-validator "^2.2.2"
     multiformats "^9.9.0"
     zod "^3.23.8"
@@ -95,6 +95,11 @@
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/@atproto/syntax/-/syntax-0.3.2.tgz#188f8dccba11e5ace1bf83cbff8ed9e1a3d2d66c"
   integrity sha512-JLMhTbXER1Im98RrozfsLAZARGIAzKCZEm+Inh1IF00XU6tHcoGKS+HOw0Uy4R2r04yvxoFs8fswmwAhmMpMdw==
+
+"@atproto/syntax@^0.4.0":
+  version "0.4.0"
+  resolved "https://registry.yarnpkg.com/@atproto/syntax/-/syntax-0.4.0.tgz#bec71552087bb24c208a06ef418c0040b65542f2"
+  integrity sha512-b9y5ceHS8YKOfP3mdKmwAx5yVj9294UN7FG2XzP6V5aKUdFazEYRnR9m5n5ZQFKa3GNvz7de9guZCJ/sUTcOAA==
 
 "@atproto/xrpc-server@0.7.10":
   version "0.7.10"
