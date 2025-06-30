@@ -24,17 +24,81 @@ Shows the user all NSFW videos from people they follow. This is a Video Feed, me
 
 Feed at https://bsky.app/profile/did:plc:bfuck3vwwacatltdmnilloym/feed/mutuals-ad-vid
 
-
 # Usage
 
 I run this with Digital Ocean App Platform, with their MongoDB as an attached service. Instructions for setting this up can be found in the above guide.
 
-To run a test feed locally I modified Bossett's original .devcontainer file to activate docker's internal host gateway and set up a connection to a local MongoDB instance by exposing more ports. Uncomment lines 26-31 to do this. I use [ngrok](https://ngrok.com/) to create a tunnel between my local docker instance's exposed IP and a hosted domain for feed publishing. 
+# Docker and Ngrok Testing
+
+For development and testing purposes, there is a docker-compose setup using Visual Studio Codes DevContainers. Start by using ngrok to create a temporary endpoint, add that to the `docker.env` file that references that endpoint as well as adding in your various configuration to publish the feed.
+
+An example:
+
+```Shell
+$ ngrok http http://localhost:3000
+ngrok                                                        (Ctrl+C to quit)
+�  Using ngrok for OSS? Request a community license: https://ngrok.com/r/oss
+Session Status                online
+Account                       John Doe (Plan: Basic)
+Version                       3.23.3
+Region                        Europe (eu)
+Latency                       24ms
+Web Interface                 http://127.0.0.1:4040
+Forwarding                    https://xyz.ngrok-free -> http://localhost:3000
+Connections                   ttl     opn     rt1     rt5     p50       p90
+                              19      0       0.00    0.00    5.15      5.29
+```
+
+Then, test these local and forwarded URLs to make sure the server is running correctly:
+
+- <http://localhost:3000/.well-known/did.json>
+- <https://xyz.ngrok-free.app/.well-known/did.json> (update "xyz." with the generated ngrok subdomain)
+
+```Shell
+$ curl http://localhost:3000/.well-known/did.json
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1"
+  ],
+  "id": "did:web:xyz.ngrok-free.app",
+  "service": [
+    {
+      "id": "#bsky_fg",
+      "type": "BskyFeedGenerator",
+      "serviceEndpoint": "https://xyz.ngrok-free.app"
+    }
+  ]
+}
+$ curl https://xyz.ngrok-free.app/.well-known/did.json | jq
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   177  100   177    0     0    621      0 --:--:-- --:--:-- --:--:--   618
+{
+  "@context": [
+    "https://www.w3.org/ns/did/v1"
+  ],
+  "id": "did:web:xyz.ngrok-free.app",
+  "service": [
+    {
+      "id": "#bsky_fg",
+      "type": "BskyFeedGenerator",
+      "serviceEndpoint": "https://xyz.ngrok-free.app"
+    }
+  ]
+}
+```
+
+From there you can publish to BSky with the yarn commands, but all database requests will be sent to your local MongoDB instance.
+
+And since we have the MongoDB extension installed in our dev instance, we can easily connect and see that the posts are being added to our database:
+
+![Image](https://github.com/user-attachments/assets/d2120d4b-484b-4b0d-8e34-e72769cb7114)
+
+Remember to unpublish afterwards!
 
 ## Database
 
 The DB could feasibly be swapped out for any other, and there are lots of changes that could make it more efficient. However, if you're new I recommend using the provided dbClient.
-
 
 ## Adding Feeds
 
