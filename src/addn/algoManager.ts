@@ -8,7 +8,7 @@ export class AlgoManager {
 
   public db: Database
   public agent: BskyAgent
-  public periodicIntervalId: NodeJS.Timer
+  public periodicIntervalId: NodeJS.Timeout | null = null
 
   public name: string = ''
 
@@ -59,6 +59,15 @@ export class AlgoManager {
 
     this._isReady = true
     return this._isReady
+  }
+
+  public async stop() {
+    if (this.periodicIntervalId) {
+      clearInterval(this.periodicIntervalId)
+      this.periodicIntervalId = null
+    }
+    this._isReady = false
+    this._isStarting = false
   }
 
   public async start() {

@@ -15,7 +15,8 @@
     "addSelfToList": "tsx scripts/addSelfToList.ts",
     "start": "node ./dist/index.js",
     "dev": "tsx ./src/index.ts",
-    "build": "tsc && tsc-alias"
+    "build": "tsc && tsc-alias",
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --no-typecheck"
   },
   "dependencies": {
     "@atcute/client": "^2.0.6",
@@ -39,7 +40,10 @@
   },
   "devDependencies": {
     "@types/express": "^4.17.21",
+    "@types/jest": "^30.0.0",
     "@types/node": "^20.11.28",
+    "jest": "^30.0.3",
+    "ts-jest": "^29.4.0",
     "tsc-alias": "1.8.10",
     "tsx": "^4.7.1",
     "typescript": "^5.4.2"

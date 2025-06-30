@@ -19,14 +19,25 @@ const includedRecords = new Set(['app.bsky.feed.post'])
 
 export abstract class FirehoseSubscriptionBase {
   public jetstream: Jetstream
+  private isRunning: boolean = false
 
   constructor(public db: Database, public service: string) {}
 
   abstract handleEvent(evt: any): Promise<void>
 
+  async stop(): Promise<void> {
+    this.isRunning = false
+    if (this.jetstream) {
+      this.jetstream.close()
+    }
+    // Give time for resources to clean up
+    await new Promise((resolve) => setTimeout(resolve, 100))
+  }
+
   async run(subscriptionReconnectDelay: number) {
+    this.isRunning = true
     let lastSuccessfulCursor = (await this.getCursor()).cursor
-    console.log("Fetching jetstream with cursor:", lastSuccessfulCursor)
+    console.log('Fetching jetstream with cursor:', lastSuccessfulCursor)
     const eventQueue: any[] = []
 
     this.jetstream = new Jetstream({
@@ -80,7 +91,7 @@ export abstract class FirehoseSubscriptionBase {
       let handledEvents = 0
       let lastSuccessfulCursor = (await this.getCursor()).cursor
 
-      while (true) {
+      while (this.isRunning) {
         if (eventQueue.length === 0) {
           if (
             this.jetstream.ws?.readyState !== WebSocket.OPEN &&

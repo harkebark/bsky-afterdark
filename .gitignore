@@ -134,3 +134,4 @@ dist
 scripts/publishExternal.ts
 scripts/publishWords.ts
 images/external.jpg
+.devcontainer/docker.env
